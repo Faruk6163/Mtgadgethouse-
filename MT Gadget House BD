@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobile Shop BD</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .search-bar, .category-filter {
+      text-align: center;
+      margin: 15px;
+    }
+
+    .search-bar input, .category-filter select {
+      padding: 8px;
+      width: 250px;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+    }
+
+    .product-card h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+    }
+
+    .product-card p {
+      color: #444;
+      font-weight: bold;
+    }
+
+    .product-card a {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #25D366;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    #contact {
+      background: #fff;
+      padding: 20px;
+      margin: 40px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #contact input, #contact textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    #contact button {
+      background: #1a1a1a;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>Mobile Shop BD</header>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="পণ্যের নাম লিখুন...">
+</div>
+
+<div class="category-filter">
+  <select id="categorySelect">
+    <option value="all">সব ক্যাটাগরি</option>
+    <option value="phone">Phone</option>
+    <option value="accessory">Accessories</option>
+    <option value="charger">Charger</option>
+  </select>
+</div>
+
+<div class="container" id="productContainer">
+  <div class="product-card" data-category="phone">
+    <img src="https://via.placeholder.com/250x180?text=Phone+1">
+    <h3>Samsung Galaxy A14</h3>
+    <p>৳17,999</p>
+    <a href="https://wa.me/8801XXXXXXXXX">WhatsApp Order</a>
+  </div>
+
+  <div class="product-card" data-category="accessory">
+    <img src="https://via.placeholder.com/250x180?text=Earbuds">
+    <h3>Redmi Buds 4 Lite</h3>
+    <p>৳1,999</p>
+    <a href="https://wa.me/8801XXXXXXXXX">WhatsApp Order</a>
+  </div>
+
+  <div class="product-card" data-category="charger">
+    <img src="https://via.placeholder.com/250x180?text=Charger">
+    <h3>Baseus Fast Charger</h3>
+    <p>৳899</p>
+    <a href="https://wa.me/8801XXXXXXXXX">WhatsApp Order</a>
+  </div>
+</div>
+
+<section id="contact">
+  <h2>যোগাযোগ করুন</h2>
+  <form>
+    <input type="text" placeholder="আপনার নাম" required>
+    <input type="email" placeholder="ইমেইল ঠিকানা" required>
+    <textarea placeholder="মেসেজ লিখুন..." rows="5" required></textarea>
+    <button type="submit">পাঠান</button>
+  </form>
+</section>
+
+<footer>
+  © 2025 Mobile Shop BD | Developed by ChatGPT
+</footer>
+
+<script>
+  // সার্চ ফিল্টার
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const searchValue = this.value.toLowerCase();
+    document.querySelectorAll(".product-card").forEach(card => {
+      const productName = card.querySelector("h3").textContent.toLowerCase();
+      card.style.display = productName.includes(searchValue) ? "block" : "none";
+    });
+  });
+
+  // ক্যাটাগরি ফিল্টার
+  document.getElementById("categorySelect").addEventListener("change", function () {
+    const category = this.value;
+    document.querySelectorAll(".product-card").forEach(card => {
+      if (category === "all" || card.dataset.category === category) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
